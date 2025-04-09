@@ -1,0 +1,21 @@
+services:
+  taskmanagerapi:
+    image: ${DOCKER_REGISTRY-}taskmanagerapi
+    build:
+      context: .
+      dockerfile: TaskManagerApi/Dockerfile
+    depends_on:
+      - sqlserver
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2017-GA-ubuntu
+    hostname: 'sqlserver'    
+    environment:
+      SA_PASSWORD: "SqlServer2019!"
+      ACCEPT_EULA: "Y"      
+    volumes:
+      - c:\dados\volumes\mssql:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    expose:
+      - 1433
+

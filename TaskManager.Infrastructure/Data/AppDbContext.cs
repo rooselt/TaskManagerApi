@@ -11,6 +11,7 @@ namespace TaskManager.Infrastructure.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+            this.Database.EnsureCreated();
         }
 
         // DbSets
@@ -20,14 +21,6 @@ namespace TaskManager.Infrastructure.Data
         public DbSet<Comment> Comments => Set<Comment>();
         public DbSet<TaskHistory> TaskHistories => Set<TaskHistory>();
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("ConnectionStringPlaceholder",
-        //            b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
-        //    }
-        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
