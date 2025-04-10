@@ -5,7 +5,7 @@ API para gerenciamento de projetos e tarefas.
 ## Requisitos
 
 - .NET 8.0
-- Docker com Docker Compose
+- Docker 
 - SQL Server 2017
 - Visual Studio 2022 ou VSCode
 
