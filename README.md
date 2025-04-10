@@ -12,10 +12,18 @@ API para gerenciamento de projetos e tarefas.
 ## Execução com Docker
 
 1. Clone o repositório
-2. Execute: `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml" down`
+2. Execute: `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml" up`
 3. A API estará disponível em `http://localhost:8080/swagger`
+4. Crie um projeto com o Swagger
+5. Inicie o processo de criar Tarefas, listar, deletar e ver o Relatorio em Reports
 
 ![image](https://github.com/user-attachments/assets/ccac2be0-ff70-46d4-a695-9ddf87f583b6)
+
+## Usuário de Test
+
+- `UserID: 3FA85F64-5717-4562-B3FC-2C963F66AFA6`
+
+![image](https://github.com/user-attachments/assets/ab9d2e4b-c8df-45f9-98e6-23dd4a2001ea)
 
 ## Endpoints
 
@@ -26,13 +34,6 @@ API para gerenciamento de projetos e tarefas.
 - `PUT /api/projects/{projectId}/tasks/{taskId}` - Atualizar tarefa
 - `DELETE /api/projects/{projectId}/tasks/{taskId}` - Remover tarefa
 - `GET /api/reports/performance?managerId={managerId}` - Relatório de desempenho
-
-## Usuário de Test
-
-- `UserID: 3FA85F64-5717-4562-B3FC-2C963F66AFA6`
-
-![image](https://github.com/user-attachments/assets/ab9d2e4b-c8df-45f9-98e6-23dd4a2001ea)
-
 
 ## Fase 2: Perguntas para o PO
 
