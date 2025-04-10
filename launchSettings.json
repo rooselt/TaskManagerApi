@@ -3,8 +3,12 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "taskmanagerapi",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "serviceActions": {
-        "taskmanagerapi": "StartDebugging"
+        "taskmanagerapi": "StartDebugging",
+        "mssql-server": "StartWithoutDebugging"
       }
     }
   }

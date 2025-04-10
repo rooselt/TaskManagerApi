@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using TaskManager.Core.Entities;
-using TaskManager.Core;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using TaskManager.Core.Enum;
 
 namespace TaskManager.Infrastructure.Data
 {
@@ -13,8 +13,7 @@ namespace TaskManager.Infrastructure.Data
         {
             this.Database.EnsureCreated();
         }
-
-        // DbSets
+ 
         public DbSet<User> Users => Set<User>();
         public DbSet<Project> Projects => Set<Project>();
         public DbSet<TaskItem> Tasks => Set<TaskItem>();
@@ -24,6 +23,14 @@ namespace TaskManager.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = new Guid("3FA85F64-5717-4562-B3FC-2C963F66AFA6"),
+                Name = "admin",
+                Role = UserRole.Manager,                
+                Email = "admin@taskmanager.com"
+            });
 
             // Aplica todas as configurações do assembly
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

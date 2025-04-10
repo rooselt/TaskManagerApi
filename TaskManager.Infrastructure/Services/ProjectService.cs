@@ -82,6 +82,7 @@ namespace TaskManager.Infrastructure.Services
                 {
                     Name = createProjectDto.Name,
                     OwnerId = createProjectDto.OwnerId,
+                    Description = createProjectDto.Description,
                     CreatedAt = DateTime.UtcNow
                 };
 
