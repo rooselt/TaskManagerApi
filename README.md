@@ -31,7 +31,7 @@ API para gerenciamento de projetos e tarefas.
 
 - `UserID: 3FA85F64-5717-4562-B3FC-2C963F66AFA6`
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/ab9d2e4b-c8df-45f9-98e6-23dd4a2001ea)
 
 
 ## Fase 2: Perguntas para o PO
