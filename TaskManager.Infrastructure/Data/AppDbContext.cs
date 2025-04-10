@@ -3,17 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using TaskManager.Core.Entities;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TaskManager.Core.Enum;
+using Microsoft.Extensions.Configuration;
 
 namespace TaskManager.Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        private  IConfiguration _configuration;
+        public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
         {
+            _configuration = configuration;
+
             this.Database.EnsureCreated();
         }
- 
+
         public DbSet<User> Users => Set<User>();
         public DbSet<Project> Projects => Set<Project>();
         public DbSet<TaskItem> Tasks => Set<TaskItem>();
@@ -24,17 +27,10 @@ namespace TaskManager.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasData(new User
-            {
-                Id = new Guid("3FA85F64-5717-4562-B3FC-2C963F66AFA6"),
-                Name = "admin",
-                Role = UserRole.Manager,                
-                Email = "admin@taskmanager.com"
-            });
+            SeedData.ManagerUser(modelBuilder, _configuration);
 
-            // Aplica todas as configurações do assembly
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+        }           
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
