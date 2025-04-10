@@ -15,6 +15,8 @@ API para gerenciamento de projetos e tarefas.
 2. Execute: `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml" down`
 3. A API estará disponível em `http://localhost:8080/swagger`
 
+![image](https://github.com/user-attachments/assets/ccac2be0-ff70-46d4-a695-9ddf87f583b6)
+
 ## Endpoints
 
 - `GET /api/projects?userId={userId}` - Listar projetos do usuário
@@ -28,6 +30,9 @@ API para gerenciamento de projetos e tarefas.
 ## Usuário de Test
 
 - `UserID: 3FA85F64-5717-4562-B3FC-2C963F66AFA6`
+
+![Uploading image.png…]()
+
 
 ## Fase 2: Perguntas para o PO
 
