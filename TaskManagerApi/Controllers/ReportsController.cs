@@ -5,14 +5,9 @@ namespace TaskManagerAPI.Controllers
 {
     [ApiController]
     [Route("api/reports")]
-    public class ReportsController : ControllerBase
+    public class ReportsController(IReportService reportService) : ControllerBase
     {
-        private readonly IReportService _reportService;
-
-        public ReportsController(IReportService reportService)
-        {
-            _reportService = reportService;
-        }
+        private readonly IReportService _reportService = reportService;
 
         [HttpGet("performance")]
         public async Task<IActionResult> GetPerformanceReport(

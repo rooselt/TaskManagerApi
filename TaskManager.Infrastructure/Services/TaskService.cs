@@ -43,8 +43,8 @@ namespace TaskManager.Infrastructure.Services
 
         public async Task<TaskItem> CreateTask(Guid projectId, CreateTaskDto dto)
         {
-            var project = await _projectRepository.GetByIdAsync(projectId) ?? throw new NotFoundException("Project not found");
-            if (project.Tasks.Count >= 20)
+            var projectTaskCount = await _projectRepository.CountTasksInProjectAsync(projectId);
+            if (projectTaskCount >= 20)
                 throw new BusinessException("Project has reached the maximum number of tasks (20)");
 
             if (string.IsNullOrWhiteSpace(dto.Title))
@@ -58,11 +58,12 @@ namespace TaskManager.Infrastructure.Services
                 Status = TaskStatus.Pending,
                 Priority = dto.Priority,
                 ProjectId = projectId,
+                CreatedByUserId = dto.UserId,
                 CreatedAt = DateTime.UtcNow
             };
 
             await _taskRepository.AddAsync(task);
-            await _historyService.RecordHistoryAsync(task.Id, dto.UserId, "Task created", HistoryActionType.StatusChanged);
+            await _historyService.RecordHistoryAsync(task.Id, dto.UserId, "Task created", HistoryActionType.Created);
 
             return task;
         }

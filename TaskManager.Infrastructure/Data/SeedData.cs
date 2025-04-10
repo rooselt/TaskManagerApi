@@ -18,18 +18,14 @@ namespace TaskManager.Infrastructure.Data
                 !string.IsNullOrEmpty(managerNameConfig) &&
                 !string.IsNullOrEmpty(managerRoleConfig) &&
                 !string.IsNullOrEmpty(managerEmailConfig))
-            {
-                var managerId = Guid.Parse(managerIdConfig);
-                var managerName = managerNameConfig;
-                var managerRole = managerRoleConfig;
-                var managerEmail = managerEmailConfig;
+            {                  
 
                 modelBuilder.Entity<User>().HasData(new User
                 {
-                    Id = managerId,
-                    Name = managerName,
+                    Id = Guid.Parse(managerIdConfig),
+                    Name = managerNameConfig,
                     Role = UserRole.Manager,
-                    Email = managerEmail,
+                    Email = managerEmailConfig,
                     CreatedAt = DateTime.UtcNow
                 });
             }

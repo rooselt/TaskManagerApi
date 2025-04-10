@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using TaskManager.Core.DTOs;
-using TaskManager.Core.Interfaces;
 using TaskManager.Core.Models;
 using TaskManager.Core.Entities;
 using TaskManager.Core.Interfaces.Service;

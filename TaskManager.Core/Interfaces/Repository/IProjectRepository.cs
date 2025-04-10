@@ -8,6 +8,7 @@ namespace TaskManager.Core.Interfaces.Repository
     {
         Task<IEnumerable<Project>> GetUserProjectsAsync(Guid userId);
         Task<int> CountUserProjectsAsync(Guid userId);
+        Task<int> CountTasksInProjectAsync(Guid projectId);
         Task<bool> ExistsAsync(Guid taskId);
     }
 

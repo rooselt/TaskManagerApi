@@ -1,15 +1,13 @@
 using Microsoft.Extensions.Logging;
 using Moq;
-using TaskManager.Core;
 using TaskManager.Core.DTOs;
 using TaskManager.Core.Entities;
 using TaskManager.Core.Enum;
-using TaskManager.Core.Interfaces;
 using TaskManager.Core.Interfaces.Repository;
 using TaskManager.Infrastructure.Services;
 using TaskStatus = TaskManager.Core.Enum.TaskStatus;
 
-namespace TaskManager.Test
+namespace TaskManager.Test.Services
 {
     [TestClass]
     public class TaskServiceTests
@@ -89,6 +87,8 @@ namespace TaskManager.Test
                 ProjectId = Guid.NewGuid() // Example required property
             }).ToList();
    
+            _mockProjectRepo.Setup(x => x.CountTasksInProjectAsync(projectId))
+                .ReturnsAsync(20);
 
             _mockProjectRepo.Setup(x => x.GetByIdAsync(projectId))
                 .ReturnsAsync(new Project { Id = projectId, Tasks = tasks });
@@ -124,6 +124,9 @@ namespace TaskManager.Test
             _mockTaskRepo.Setup(x => x.GetByIdAsync(taskId))
                 .ReturnsAsync(existingTask);
 
+            _mockUserRepo.Setup(x => x.ExistsAsync(userId))
+             .ReturnsAsync(true);
+
             var dto = new UpdateTaskDto
             {
                 Title = "New Title",
@@ -139,7 +142,7 @@ namespace TaskManager.Test
             Assert.AreEqual(TaskStatus.InProgress, result.Status);
             _mockTaskRepo.Verify(x => x.UpdateAsync(It.IsAny<TaskItem>()));
             _mockHistoryService.Verify(x => x.RecordHistoryAsync(
-                taskId, userId, It.IsAny<string>(), HistoryActionType.StatusChanged));
+                taskId, userId, It.IsAny<string>(), HistoryActionType.Updated));
         }
     }
 }
