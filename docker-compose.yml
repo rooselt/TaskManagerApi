@@ -5,17 +5,14 @@ services:
       context: .
       dockerfile: TaskManagerApi/Dockerfile
     depends_on:
-      - sqlserver
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2017-GA-ubuntu
-    hostname: 'sqlserver'    
+      - mssql-server
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     environment:
-      SA_PASSWORD: "SqlServer2019!"
-      ACCEPT_EULA: "Y"      
-    volumes:
-      - c:\dados\volumes\mssql:/var/opt/mssql
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "numsey#2021"
+      MSSQL_PID: Express
     ports:
       - "1433:1433"
-    expose:
-      - 1433
-
+    volumes:
+      - C:\dados\volumes\sqlserver:/var/opt/mssql/data

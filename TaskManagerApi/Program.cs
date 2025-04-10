@@ -18,7 +18,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+    var defaultConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseSqlServer(defaultConnection,
        sqlOptions => sqlOptions.MigrationsAssembly("TaskManager.Infrastructure"));
 
     // Habilita logging detalhado em desenvolvimento
