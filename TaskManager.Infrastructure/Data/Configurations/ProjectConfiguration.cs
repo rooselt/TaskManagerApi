@@ -23,6 +23,13 @@ namespace TaskManager.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasDefaultValueSql("GETUTCDATE()");
 
+
+            builder.Property(t => t.IsDeleted)            
+             .HasDefaultValue(false);
+
+            builder.Property(t => t.DeletedAt)
+            .IsRequired(false);
+
             builder.HasIndex(p => p.OwnerId);
 
             builder.HasOne(p => p.Owner)

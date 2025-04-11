@@ -24,6 +24,12 @@ namespace TaskManager.Infrastructure.Data.Configurations
                 .HasConversion<string>()
                 .HasMaxLength(10);
 
+            builder.Property(t => t.IsDeleted)            
+            .HasDefaultValue(false);
+
+            builder.Property(t => t.DeletedAt)
+            .IsRequired(false);
+
             builder.Property(u => u.CreatedAt)
                 .IsRequired()
                 .HasDefaultValueSql("GETUTCDATE()");

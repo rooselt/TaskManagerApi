@@ -4,7 +4,7 @@ using TaskManager.Core.Entities;
 
 
 namespace TaskManager.Infrastructure.Data.Configurations
-{   
+{
     public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
@@ -26,6 +26,12 @@ namespace TaskManager.Infrastructure.Data.Configurations
                 .HasForeignKey(c => c.AuthorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Property(t => t.IsDeleted)            
+            .HasDefaultValue(false);
+
+            builder.Property(t => t.DeletedAt)
+            .IsRequired(false);
+
             builder.HasIndex(c => c.TaskId);
 
             builder.HasOne(c => c.Task)
@@ -35,5 +41,5 @@ namespace TaskManager.Infrastructure.Data.Configurations
         }
     }
 
-   
+
 }

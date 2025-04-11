@@ -42,7 +42,8 @@ namespace TaskManager.Infrastructure.Repositories
                 .Include(th => th.Task)
                 .ToListAsync();
         }
-
+              
+        
         public async Task AddHistoryAsync(Guid taskId, Guid userId, string changeDescription, HistoryActionType actionType)
         {
             var history = new TaskHistory

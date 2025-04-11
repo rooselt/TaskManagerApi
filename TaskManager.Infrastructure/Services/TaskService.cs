@@ -164,7 +164,7 @@ namespace TaskManager.Infrastructure.Services
             _logger.LogInformation("Iniciando exclusão da tarefa {TaskId} do projeto {ProjectId}", taskId, projectId);
 
             // Verifica se a tarefa existe e pertence ao projeto
-            var task = await _taskRepository.GetByIdAsync(taskId);
+            var task = await _taskRepository.GetTaskAsync(taskId);
             if (task == null || task.ProjectId != projectId)
             {
                 _logger.LogWarning("Tarefa não encontrada: {TaskId} no projeto {ProjectId}", taskId, projectId);
@@ -176,10 +176,9 @@ namespace TaskManager.Infrastructure.Services
             {
                 _logger.LogWarning("Projeto associado à tarefa {TaskId} é nulo", taskId);
                 throw new InvalidOperationException($"Projeto associado à tarefa {taskId} é nulo.");
-            }
+            }          
 
-            // Remove a tarefa
-            await _taskRepository.DeleteAsync(task);
+            await _taskRepository.DeleteTaskAsync(taskId);
 
             // Registra no histórico
             await _historyService.RecordHistoryAsync(taskId, task.Project.OwnerId,
@@ -188,6 +187,7 @@ namespace TaskManager.Infrastructure.Services
 
             _logger.LogInformation("Tarefa {TaskId} excluída com sucesso", taskId);
         }
+
 
 
         public async Task<UserProductivityReportDto> GetUserProductivityReportAsync(Guid userId, DateTime startDate, DateTime endDate)

@@ -1,9 +1,10 @@
 ﻿using TaskManager.Core.Enum;
+using TaskManager.Core.Interfaces;
 
 
 namespace TaskManager.Core.Entities
 {
-    public class User
+    public class User : ISoftDelete, IHasCreationTime
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
@@ -11,6 +12,8 @@ namespace TaskManager.Core.Entities
         public ICollection<Project> Projects { get; set; } = [];
         public string? Email { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeletedAt { get; set; }
     }
 
 }

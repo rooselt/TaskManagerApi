@@ -29,6 +29,17 @@ namespace TaskManager.Infrastructure.Data.Configurations
                 .HasForeignKey(th => th.ChangedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
+            builder.Property(t => t.IsDeleted)            
+             .HasDefaultValue(false);
+
+            builder.Property(p => p.CreatedAt)
+                .IsRequired()
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Property(t => t.DeletedAt)
+            .IsRequired(false);
+
             builder.HasOne(th => th.Task)
                 .WithMany(t => t.History)
                 .HasForeignKey(th => th.TaskId)

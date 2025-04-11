@@ -3,6 +3,7 @@ using TaskStatus = TaskManager.Core.Enum.TaskStatus;
 using TaskManager.Infrastructure.Data;
 using TaskManager.Core.Entities;
 using TaskManager.Core.Interfaces.Repository;
+using TaskManager.Infrastructure.Repositories.Extensions;
 
 namespace TaskManager.Infrastructure.Repositories
 {
@@ -42,6 +43,15 @@ namespace TaskManager.Infrastructure.Repositories
                 .Include(p => p.Tasks)
                 .ThenInclude(t => t.Comments)
                 .FirstOrDefaultAsync(p => p.Id == projectId);
+        }
+
+        public async Task DeleteProjectAsync(Guid projectId)
+        {
+            var project = await _context.Projects.FirstOrDefaultAsync(t => t.Id == projectId)
+                ?? throw new NotFoundException(nameof(TaskItem), projectId);
+
+            _context.Projects.DeleteWithAudit(project);
+            await _context.SaveChangesAsync();
         }
     }
 }

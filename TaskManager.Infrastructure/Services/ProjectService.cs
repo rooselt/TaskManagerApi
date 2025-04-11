@@ -118,7 +118,8 @@ namespace TaskManager.Infrastructure.Services
                     return OperationResult.Fail("Não é possível excluir um projeto com tarefas pendentes", new object()); // Substituindo 'null' por 'new object()'
                 }
 
-                await _projectRepository.DeleteAsync(project);
+                await _projectRepository.DeleteProjectAsync(project.Id);
+
                 _logger.LogInformation("Projeto {ProjectId} excluído com sucesso", projectId);
 
                 return OperationResult.Ok(new object(), "Projeto excluído com sucesso"); // Substituindo 'null' por 'new object()'

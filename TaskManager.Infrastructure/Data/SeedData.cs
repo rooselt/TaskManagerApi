@@ -26,7 +26,7 @@ namespace TaskManager.Infrastructure.Data
                     Name = managerNameConfig,
                     Role = UserRole.Manager,
                     Email = managerEmailConfig,
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 });
             }
         }

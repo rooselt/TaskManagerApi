@@ -3,6 +3,8 @@ using TaskManager.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Core.Interfaces.Repository;
 using TaskManager.Core.Entities;
+using System.Threading.Tasks;
+using TaskManager.Infrastructure.Repositories.Extensions;
 
 namespace TaskManager.Infrastructure.Repositories
 {
@@ -18,6 +20,13 @@ namespace TaskManager.Infrastructure.Repositories
                 .OrderByDescending(t => t.Priority)
                 .ThenBy(t => t.DueDate)
                 .ToListAsync();
+        }
+
+        public async Task<TaskItem?> GetTaskAsync(Guid taskId)
+        {
+            return await _context.Tasks
+                .Include(t => t.Project)
+                .FirstOrDefaultAsync(t => t.Id == taskId);
         }
 
         public async Task<IEnumerable<TaskItem>> GetTasksByStatusAsync(Guid projectId, TaskStatus status)
@@ -115,6 +124,14 @@ namespace TaskManager.Infrastructure.Repositories
                 query = query.Where(t => t.CompletedAt <= endDate.Value);
 
             return await query.CountAsync();
+        }
+
+        public async Task DeleteTaskAsync(Guid taskId)
+        {
+            var taskItem = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == taskId)
+                ?? throw new NotFoundException(nameof(TaskItem), taskId);
+
+            _context.Tasks.DeleteWithAudit(taskItem);
         }
     }
 }

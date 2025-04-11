@@ -28,7 +28,13 @@ namespace TaskManager.Infrastructure.Data.Configurations
 
             builder.Property(t => t.CompletedAt)
             .IsRequired(false);
-           
+
+            builder.Property(t => t.IsDeleted)            
+             .HasDefaultValue(false);
+
+
+            builder.Property(t => t.DeletedAt)
+            .IsRequired(false);
 
             builder.Property(t => t.Priority)
                 .HasConversion<string>()
@@ -41,6 +47,7 @@ namespace TaskManager.Infrastructure.Data.Configurations
             builder.HasIndex(t => new { t.ProjectId, t.Status });
 
             builder.HasIndex(t => t.DueDate);
+
 
             builder.HasOne(t => t.Project)
                 .WithMany(p => p.Tasks)

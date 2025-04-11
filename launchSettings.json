@@ -1,15 +1,16 @@
 {
   "profiles": {
     "Docker Compose": {
-      "commandName": "DockerCompose",
-      "commandVersion": "1.0",
-      "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "taskmanagerapi",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
-      "serviceActions": {
-        "taskmanagerapi": "StartDebugging",
-        "mssql-server": "StartWithoutDebugging"
-      }
+        "commandName": "DockerCompose",
+        "commandVersion": "1.0",
+        "composeLaunchAction": "LaunchBrowser",
+        "composeLaunchServiceName": "taskmanagerapi",
+        "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+        "applicationUrl": "http://localhost:8080",
+        "serviceActions": {
+            "taskmanagerapi": "StartDebugging",
+            "mssql-server": "StartWithoutDebugging"
+        }
     }
   }
 }

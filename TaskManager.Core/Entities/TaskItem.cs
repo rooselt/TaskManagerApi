@@ -1,11 +1,12 @@
 ﻿using TaskManager.Core.Enum;
+using TaskManager.Core.Interfaces;
 using TaskStatus = TaskManager.Core.Enum.TaskStatus;
 
 
 namespace TaskManager.Core.Entities
 {   
 
-    public class TaskItem
+    public class TaskItem : ISoftDelete, IHasCreationTime
     {
         public Guid Id { get; set; }
         public required string Title { get; set; }
@@ -22,7 +23,8 @@ namespace TaskManager.Core.Entities
         public Guid? AssignedUserId { get; set; }
         public User? AssignedUser { get; set; }
         public Guid CreatedByUserId { get; set; }
-
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeletedAt { get; set; }
     }   
 
 }

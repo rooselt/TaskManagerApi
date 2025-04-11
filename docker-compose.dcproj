@@ -22,4 +22,7 @@
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

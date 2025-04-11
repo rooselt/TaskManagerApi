@@ -10,6 +10,7 @@ namespace TaskManager.Core.Interfaces.Repository
         Task<int> CountUserProjectsAsync(Guid userId);
         Task<int> CountTasksInProjectAsync(Guid projectId);
         Task<bool> ExistsAsync(Guid taskId);
+        Task DeleteProjectAsync(Guid projectId);
     }
 
 }
