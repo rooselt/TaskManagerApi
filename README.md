@@ -17,6 +17,8 @@ API para gerenciamento de projetos e tarefas.
 4. Crie um projeto com o Swagger
 5. Inicie o processo de criar Tarefas, listar, deletar e ver o Relatorio em Reports
 
+![image](https://github.com/user-attachments/assets/828a8bb6-dff6-4c2e-b016-c32acb655c64)
+
 ![image](https://github.com/user-attachments/assets/ccac2be0-ff70-46d4-a695-9ddf87f583b6)
 
 ## Usuário de Test
