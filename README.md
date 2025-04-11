@@ -36,6 +36,10 @@ API para gerenciamento de projetos e tarefas.
 - `PUT /api/projects/{projectId}/tasks/{taskId}` - Atualizar tarefa
 - `DELETE /api/projects/{projectId}/tasks/{taskId}` - Remover tarefa
 - `GET /api/reports/performance?managerId={managerId}` - Relatório de desempenho
+- `GET /api/reports/project-progress/{projectId}` - Relatório de desempenho
+- `GET /api/reports/tasks-status` - Relatório de desempenho
+- `GET /api/reports/user-tasks/{userId}` - Relatório de desempenho
+
 
 ## Fase 2: Perguntas para o PO
 
